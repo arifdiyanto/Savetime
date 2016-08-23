@@ -10,6 +10,7 @@ class MysqliEngine extends App {
 	private $lastQuery;
 	private $sf_errno;
 	private $sf_error;
+	private $fieldsFetch;
 
 	public function openConnection($host, $user, $pass, $dbname) {
 		$this->dbconn = new mysqli($host, $user, $pass, $dbname);
@@ -21,13 +22,20 @@ class MysqliEngine extends App {
 	public function query($str_query) {
 		$this->lastQuery = $str_query;
 		$data = $this->dbconn->query($str_query);
+
 		if ($this->dbconn->errno == 0) {
+			$this->fieldsFetch = [];
+			$this->fieldsFetch = $data->fetch_fields();
 			return $data;
 		} else {
 			$this->sf_errno = $this->dbconn->errno;
 			$this->sf_error = $this->dbconn->error;
 			return false;
 		}
+	}
+
+	public function getFieldsFetch() {
+		return $this->fieldsFetch;
 	}
 
 	public function getLastQuery() {

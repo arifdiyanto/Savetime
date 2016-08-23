@@ -37,17 +37,25 @@ class CIndex extends Controller {
 
 	public function buildScript() {
 		$tbl = Req::post('table');
-		$fld = Req::post('fields');
+		$cekTable = $this->objSystem->query("show tables like '" . $tbl . "'");
 
-		$arr = explode(',', $fld);
-		foreach ($arr as $k => $v) {
-			$newStr = trim($v);
-			// $newStr = preg_replace("/^[a-zA-Z0-9]+/", '', $newStr);
-			$newStr = str_replace('`', '', $newStr);
-			$newStr = str_replace("'", '', $newStr);
-			$arr[$k] = $newStr;
+		if (!$cekTable->num_rows > 0) {
+			$tables = $this->objSystem->query("show tables");
+			$str = "<ol>";
+			foreach ($tables as $key => $v) {
+				foreach ($v as $key => $value) {
+					$str .= "<li>$key : <b class='text-blue pointer' onclick='oGenerate(this.title)' title='$value'>" . $value . "</b></li>";
+				}
+			}
+			$str . "</ol>";
+			return "<code>Sorry! Table <b><i>$tbl</i></b> not found</code><br><h4>These are existing tables :</h4>$str";
+		} else {
+			$data = $this->objSystem->query("select * from $tbl limit 0,1");
+			$flds = $this->objSystem->getFieldsFetch();
+
+			return View::render('/content/sfgenerator/sfgenerator_result', compact(['arr', 'flds', 'tbl']));
 		}
-		return View::render('/content/sfgenerator/sfgenerator_result', compact(['arr', 'tbl']));
+
 	}
 
 	public function login() {

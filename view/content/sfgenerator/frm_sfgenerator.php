@@ -3,6 +3,10 @@ $("#document").ready(function() {
     // $(".clear").val('');
 });
 
+function oGenerate(tbl){
+    $("#table").val(tbl);
+    oSave();
+}
 function oSave() {
     $(".textError").removeClass("textError");
     var cek = true;
@@ -45,11 +49,11 @@ function oSave() {
 }
 </script>
 <form id="frm" method="POST" action="CIndex/buildScript">
-    <label>Table Name</label>
-    <input type="text" name="table" class="form-control input-sm must clear">
-    <label>Raw Fields</label><code>Pisahkan dengan koma</code>
+    <label>Write Your Table Name</label>
+    <input type="text" id="table" name="table" class="form-control input-sm must clear">
+    <!-- <label>Raw Fields</label><code>Pisahkan dengan koma</code>
     <textarea name="fields" class="form-control input-sm must clear" rows="5" placeholder="Contoh : `kode`,`nama`,`created_date`">
-    </textarea><br>
+    </textarea> --><br>
     <button type="button" id="btn-save" class="btn btn-sm btn-default" onclick="oSave();"><i class="fa fa-flash"></i> Generate</button>
 </form>
 <div class="" id="div1"></div>
