@@ -51,12 +51,10 @@ class CIndex extends Controller {
 	}
 
 	public function login() {
-		//ini baru test saja, belum di db kan
-		$arr['userid'] = Req::post('userid');
-		if (Req::post('pass') == '123') {
-			Session::set($arr);
+		if (Session::auth(Req::post('userid'), Req::post('pass'), Req::post('rememberme'))) {
 			return $this->index();
 		} else {
+			Session::setFlash('error-login', Session::getError());
 			return Route::redirect(ROOT);
 		}
 

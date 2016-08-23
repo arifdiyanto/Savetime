@@ -34,12 +34,12 @@
         <input name="pass" type="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-      <?=isset($arr['msg']) ? $arr['msg'] : ""?>
+      <?=Session::getFlash('error-login', '')?>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox" name="rememberme" value=1> Remember Me
             </label>
           </div>
         </div>

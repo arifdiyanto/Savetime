@@ -229,15 +229,15 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?=HTTP_A?>/images/adminlte/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs"><?=Session::get('userid')?></span>
+                                <span class="hidden-xs"><?=Session::user('username')?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="<?=HTTP_A?>/images/adminlte/user2-160x160.jpg" class="img-circle" alt="User Image">
                                     <p>
-                                        <?=Session::get('userid')?> - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        <?=Session::user('username')?> - <?=Session::get('userid')?>
+                                        <small>Login at : <?=date('d M Y H:i', strtotime(Session::get('login_at')))?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -284,7 +284,7 @@
                         <img src="<?=HTTP_A?>/images/adminlte/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p><?=Session::get('userid')?></p>
+                        <p title="<?=Session::get('userid')?>"><?=Session::user('username')?></p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
