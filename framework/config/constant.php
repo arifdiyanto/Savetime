@@ -13,7 +13,7 @@ if ($_SERVER['SERVER_PORT'] == 80) {
 }
 // $folder = "/" . trim(dirname(dirname(htmlspecialchars(substr(dirname(__FILE__), strlen($_SERVER['DOCUMENT_ROOT']))))));
 $folder = substr(dirname(dirname(dirname(__FILE__))), strlen($_SERVER['DOCUMENT_ROOT']));
-define('ROOT', $http . $ip . $folder);
+define('ROOT', $http . $ip . "/" . $folder);
 define('HTTP_SERVER', ROOT);
 define('APP_BASE', $folder == "" ? "sf" : $folder);
 
