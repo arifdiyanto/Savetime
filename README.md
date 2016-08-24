@@ -3,6 +3,8 @@ Framework ini dibuat untuk memudahkan pembuatan proyek website dengan PHP, mengg
 
 Demo bisa dilihat di http://savetime.hol.es/
 
+Development by Arif Diyanto, Fahrudin Yuniwinanto
+
 Fitur yang dimuat disini antara lain :
 - Routing
 - Database Engine
