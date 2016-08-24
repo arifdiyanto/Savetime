@@ -4,6 +4,9 @@
     <p>Just simple framework purpose for CRUD (create, read, update, delete) and others. <br> Using this framework You can save your time in development. Create Fast, Simple, and ... Savetime!</p>
     <code><?=HTTP_C?></code><hr>
     <p>
+    Untuk kemudahan development, gunakan fitur <b>Script Generator</b> di menu System &raquo; Generator
+    </p>
+    <p>
         <a class="btn btn-lg btn-primary" href="http://arifdiyanto.wordpress.com" target="_blank" role="button">See The Author Site &raquo;</a>
     </p>
 </div>
