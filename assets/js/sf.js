@@ -41,7 +41,7 @@ function oSetInputValidation() {
         minViewMode: "years",
         autoclose: true
     });
-    
+
 }
 
 function fNum(a) {
@@ -70,6 +70,7 @@ function fNum(a) {
     }
     return ret;
 }
+
 function oLoadPagination(selector, fn) {
     $(selector + ' .pagination a').on('click', function(event) {
         event.preventDefault();
@@ -83,4 +84,12 @@ function oLoadPagination(selector, fn) {
         }
     });
     if (fn) fn();
+}
+
+function copyToClipboard(element) {
+    var $temp = $("<textarea>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
 }
