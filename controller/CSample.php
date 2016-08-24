@@ -55,11 +55,4 @@ class CSample extends Controller {
 		}
 	}
 
-	public function testPaging() {
-		$q = Req::post('q');
-		$arr = $this->objSample->selectPaging("SELECT * FROM sample where nama like '%" . $q . "%'", 2);
-		$data = $arr['data'];
-		return View::render('content/sample/sample_list', compact(['q', 'data']));
-	}
-
 }

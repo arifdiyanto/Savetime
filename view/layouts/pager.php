@@ -43,7 +43,7 @@ if ($to == $maxpage) {
 	$strMax = "<li><span>..</span></li><li><a href='$href&page=$maxpage'>$maxpage</a></li>";
 }
 // display pager
-if ($maxpage == 1) {
+if ($maxpage <= 1) {
 	//tdk perlu pakai paging
 } else {
 	echo "<ul class='pagination'>
