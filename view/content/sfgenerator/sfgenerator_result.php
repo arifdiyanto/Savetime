@@ -78,7 +78,7 @@ class C$aTbl extends Controller {
     private \$obj$aTbl;
 
     function __construct() {
-        \$this->obj$aTbl = M$aTbl::model();
+        \$this->obj$aTbl = $aTbl::model();
     }
 
     public function index() {
@@ -87,7 +87,7 @@ class C$aTbl extends Controller {
 
     public function getList() {
         \$q = Req::post('q');
-        \$data = \$this->obj" . $aTbl . "->selectPaging(\"*\", \"$bTbl where nama like '%\" . \$q . \"%'\", 3);
+        \$data = \$this->obj" . $aTbl . "->selectPaging(\"*\", \"$bTbl where " . $tblkey . " like '%\" . \$q . \"%'\", 3);
         \$pager = View::render('layouts/pager', compact(['data']));
         return View::render('content/$bTbl/" . $bTbl . "_list', compact(['q', 'data', 'pager']));
     }
@@ -333,11 +333,13 @@ $str = "<?=(\$q == '' ? '' : \"Anda mencari <code>\$q</code>\")?>
             <thead>
                 <tr>
                     <?php
+                    $i=0;
                     foreach (\$data['data'][0] as \$k => \$v):
-                        if (\$k == 0) {
+                        if (\$i == 0) {
                             \$pk = \$v;
                         }
                         echo \"<th>\$k</th>\";
+                        $i++;
                     endforeach
                     ?>
                 </tr>
