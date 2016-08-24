@@ -1,4 +1,4 @@
-# SF (PHP Simple Framework)
+# SF - (Savetime Framework) V.1.0.0
 Framework ini dibuat untuk memudahkan pembuatan proyek website dengan PHP, menggunakan konsep MVC.
 
 Fitur yang dimuat disini antara lain :
