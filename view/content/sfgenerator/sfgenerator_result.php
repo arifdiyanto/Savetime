@@ -346,7 +346,7 @@ $str = "<?=(\$q == '' ? '' : \"Anda mencari <code>\$q</code>\")?>
             </thead>
             <tbody>
                 <?php foreach (\$data['data'] as \$k => \$v): ?>
-                <tr class=\"pointer\" onclick=\"oShow('<?=\$v['\$pk']?>')\">
+                <tr class=\"pointer\" onclick=\"oShow('<?=\$pk?>')\">
                     <?php foreach (\$v as \$key => \$value): ?>
                     <td>
                         <?=\$value?>
