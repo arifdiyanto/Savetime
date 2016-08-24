@@ -67,7 +67,8 @@ echo nl2br(htmlspecialchars($str));
             <h3 class='pointer text-blue' onclick="$('pre.sfcontroller').toggle()">Controller : <i><?='C' . $aTbl?>.php</i></h3>
             <pre class='more sfcontroller'><code>
 <?php
-$str = "require_once dirname(dirname(__FILE__)) . \"/config/conf.php\";
+$str = "<?php
+require_once dirname(dirname(__FILE__)) . \"/config/conf.php\";
 require_once DIR_M . \"/$aTbl.php\";
 
 /**
