@@ -11,9 +11,9 @@ if ($_SERVER['SERVER_PORT'] == 80) {
 } else {
 	$ip = $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
 }
-$folder = trim(dirname(dirname(htmlspecialchars(substr(dirname(__FILE__), strlen($_SERVER['DOCUMENT_ROOT']))))));
-
-define('ROOT', $http . $ip . '/' . $folder);
+$folder = "/" . trim(dirname(dirname(htmlspecialchars(substr(dirname(__FILE__), strlen($_SERVER['DOCUMENT_ROOT']))))));
+$folder = ""; //perlu diperbaiki untuk membaca root folder
+define('ROOT', $http . $ip . $folder);
 define('HTTP_SERVER', ROOT);
 define('APP_BASE', $folder);
 

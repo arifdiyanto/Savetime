@@ -9,4 +9,5 @@ define('DB_USER', 'root'); // database user name
 define('DB_PASS', ''); // database password
 define('DB_NAME', 'sfdb'); // database name
 
+// demo on http://savetime.hol.es/
 ?>
