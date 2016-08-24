@@ -1,11 +1,11 @@
-# Savetime (PHP Framework) v.1.0.0
+#Savetime (PHP Framework) v.1.0.0
 Framework ini dibuat untuk memudahkan pembuatan proyek website dengan PHP, menggunakan konsep MVC.
 
 Demo bisa dilihat di http://savetime.hol.es/
 
 Development by Arif Diyanto, Fahrudin Yuniwinanto
 
-Fitur yang dimuat disini antara lain :
+Fitur yang dimuat disini antara lain:
 - Routing
 - Database Engine
 - View Render
