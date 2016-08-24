@@ -333,7 +333,7 @@ $str = "<?=(\$q == '' ? '' : \"Anda mencari <code>\$q</code>\")?>
             <thead>
                 <tr>
                     <?php
-                    $i=0;
+                    \$i=0;
                     foreach (\$data['data'][0] as \$k => \$v):
                         if (\$i == 0) {
                             \$pk = \$v;
