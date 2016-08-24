@@ -19,4 +19,4 @@ Kritik dan masukan sangat kami harapkan untuk pengembangan SF framework ini.
 
 Salam, 
 
-Arif Diyanto
+Arif Diyanto.
