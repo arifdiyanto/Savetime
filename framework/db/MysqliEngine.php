@@ -124,8 +124,10 @@ class MysqliEngine extends App {
 
 	public function selectAssoc($str_query) {
 		$data = $this->query($str_query);
+                if($data==false){
+                    return [];
+                }
 		$arr = [];
-
 		while ($row = $data->fetch_assoc()) {
 			$arr[] = $row;
 		}
@@ -135,7 +137,7 @@ class MysqliEngine extends App {
 
 	public function selectPaging($cols, $tableAndwhere, $limit = 10) {
 		$aggregate = $this->selectAssoc("select count(*) as jml from $tableAndwhere");
-		$rows = $aggregate[0]['jml'];
+		$rows = isset($aggregate[0]['jml'])?$aggregate[0]['jml']:0;
 		$maxpage = round($rows / $limit, 0, PHP_ROUND_HALF_UP);
 		$page = Req::request('page', 1);
 		$offset = $page <= 0 ? 0 : ($page - 1) * $limit;
