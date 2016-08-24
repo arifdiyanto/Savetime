@@ -339,7 +339,7 @@ $str = "<?=(\$q == '' ? '' : \"Anda mencari <code>\$q</code>\")?>
                             \$pk = \$v;
                         }
                         echo \"<th>\$k</th>\";
-                        $i++;
+                        \$i++;
                     endforeach
                     ?>
                 </tr>
