@@ -49,6 +49,7 @@
         </div>
         <!-- /.col -->
       </div>
+      <i>Gunakan userid : demo, password : demo</i>
     </form>
     <!-- /.social-auth-links -->
 
