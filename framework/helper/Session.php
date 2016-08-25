@@ -10,9 +10,20 @@ if (!isset($_SESSION)) {
 }
 
 class Session extends App {
+	/**
+	 * @var mixed
+	 */
 	private static $syuser;
+	/**
+	 * @var mixed
+	 */
 	private static $strerror;
 
+	/**
+	 * @param $userid
+	 * @param $pass
+	 * @param $rememberme
+	 */
 	public static function auth($userid, $pass, $rememberme = false) {
 		$system = System::model();
 		$data = $system->selectAssoc("select * from syuser where userid='$userid'");
@@ -35,6 +46,9 @@ class Session extends App {
 	public static function getError() {
 		return self::$strerror;
 	}
+	/**
+	 * @param $arr
+	 */
 	private static function set($arr) {
 		$enc = self::encSession($arr);
 		$_SESSION[APP_BASE] = $enc;
@@ -46,13 +60,24 @@ class Session extends App {
 		session_destroy();
 		setcookie(APP_BASE . '_sid', '', time() + 60 * 60 * 24 * 100, '/');
 	}
+	/**
+	 * @param $arr
+	 */
 	private static function encSession($arr) {
 		return base64_encode(json_encode($arr));
 	}
+	/**
+	 * @param $encripted_str
+	 */
 	private static function decSession($encripted_str) {
 		return base64_decode($encripted_str);
 	}
 
+	/**
+	 * @param $session_key
+	 * @param $default
+	 * @return mixed
+	 */
 	public static function get($session_key, $default = "") {
 		$cookie = isset($_COOKIE[APP_BASE . '_sid']) ? $_COOKIE[APP_BASE . '_sid'] : "";
 		if (!isset($_SESSION[APP_BASE]) || $_SESSION[APP_BASE] == "") {
@@ -76,6 +101,9 @@ class Session extends App {
 		}
 	}
 
+	/**
+	 * @param $key
+	 */
 	public static function user($key) {
 		$userid = self::get('userid', '');
 		$system = System::model();
@@ -84,10 +112,18 @@ class Session extends App {
 		return self::$syuser[$key];
 	}
 
+	/**
+	 * @param $key
+	 * @param $str
+	 */
 	public static function setFlash($key, $str) {
 		$_SESSION[APP_BASE . '/' . $key] = base64_encode($str);
 		return true;
 	}
+	/**
+	 * @param $key
+	 * @param $default
+	 */
 	public static function getFlash($key, $default = "") {
 		return isset($_SESSION[APP_BASE . '/' . $key]) ? base64_decode($_SESSION[APP_BASE . '/' . $key]) : $default;
 	}

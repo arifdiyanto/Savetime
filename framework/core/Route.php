@@ -5,9 +5,21 @@ require_once dirname(__FILE__) . "/../../config/conf.php";
  *
  */
 class Route extends App {
+	/**
+	 * @var mixed
+	 */
 	private static $ctrl;
+	/**
+	 * @var mixed
+	 */
 	private static $pathctrl;
+	/**
+	 * @var mixed
+	 */
 	private static $fn;
+	/**
+	 * @var mixed
+	 */
 	private static $pg;
 
 	function __construct() {
@@ -65,6 +77,9 @@ class Route extends App {
 		return new self::$ctrl;
 	}
 
+	/**
+	 * @param $url
+	 */
 	public function redirect($url) {
 		return "<script>window.location = '$url';</script>";
 	}

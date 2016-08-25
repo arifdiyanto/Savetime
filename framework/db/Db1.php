@@ -6,17 +6,29 @@ require_once DIR_F . "/db/MysqliEngine.php";
  * @author arifdiyantotmg@gmail.com
  */
 class Db1 extends MysqliEngine {
+	/**
+	 * @var mixed
+	 */
 	protected $tblName;
+	/**
+	 * @var mixed
+	 */
 	protected $arrFields;
 
 	function __construct() {
 		$this->openConnection(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getTable() {
 		return $this->tblName;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	private function getFields() {
 		return $this->arrFields;
 	}
@@ -28,6 +40,9 @@ class Db1 extends MysqliEngine {
 		}
 	}
 
+	/**
+	 * @param $arr
+	 */
 	public function setAttributs($arr) {
 		$fields = $this->getFields();
 		foreach ($arr as $k => $v) {
@@ -37,6 +52,9 @@ class Db1 extends MysqliEngine {
 		}
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function save() {
 		$fields = $this->getFields();
 		$arr = [];
@@ -46,6 +64,10 @@ class Db1 extends MysqliEngine {
 		return $this->insertDb($this->getTable(), $arr);
 	}
 
+	/**
+	 * @param $where
+	 * @return mixed
+	 */
 	public function update($where) {
 		$fields = $this->getFields();
 		$arr = [];
@@ -55,6 +77,10 @@ class Db1 extends MysqliEngine {
 		return $this->updateDb($this->getTable(), $arr, $where);
 	}
 
+	/**
+	 * @param $where
+	 * @return mixed
+	 */
 	public function del($where) {
 		return $this->deleteDb($this->getTable(), $where);
 	}

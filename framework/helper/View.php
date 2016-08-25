@@ -10,6 +10,11 @@ class View extends App {
 
 	}
 
+	/**
+	 * @param $filename
+	 * @param array $arrVariable
+	 * @return mixed
+	 */
 	public static function render($filename, $arrVariable = []) {
 		$full_path = DIR_V . "/" . $filename . ".php";
 		if (!file_exists($full_path)) {

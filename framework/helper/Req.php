@@ -9,6 +9,11 @@ class Req extends App {
 		# code...
 	}
 
+	/**
+	 * @param $id
+	 * @param $def
+	 * @return mixed
+	 */
 	public static function get($id, $def = "") {
 		if (isset($_GET[$id])) {
 			return filter_input(INPUT_GET, $id);
@@ -18,6 +23,11 @@ class Req extends App {
 
 	}
 
+	/**
+	 * @param $id
+	 * @param $def
+	 * @return mixed
+	 */
 	public static function post($id, $def = "") {
 		if (isset($_POST[$id])) {
 			return filter_input(INPUT_POST, $id);
@@ -26,6 +36,11 @@ class Req extends App {
 		}
 	}
 
+	/**
+	 * @param $id
+	 * @param $def
+	 * @return mixed
+	 */
 	public static function server($id, $def = "") {
 		if (isset($_SERVER[$id])) {
 			return filter_input(INPUT_SERVER, $id);
@@ -34,6 +49,11 @@ class Req extends App {
 		}
 	}
 
+	/**
+	 * @param $id
+	 * @param $def
+	 * @return mixed
+	 */
 	public static function cookie($id, $def = "") {
 		if (isset($_COOKIE[$id])) {
 			return filter_input(INPUT_COOKIE, $id);
@@ -42,6 +62,11 @@ class Req extends App {
 		}
 	}
 
+	/**
+	 * @param $id
+	 * @param array $def
+	 * @return mixed
+	 */
 	public static function request($id, $def = []) {
 		if (isset($_GET[$id])) {
 			return $_REQUEST[$id];
@@ -49,6 +74,9 @@ class Req extends App {
 			return $def;
 		}
 	}
+	/**
+	 * @return mixed
+	 */
 	public static function all() {
 		return $_REQUEST;
 	}

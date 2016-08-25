@@ -6,6 +6,9 @@ require_once dirname(__FILE__) . "/../../config/conf.php";
  */
 class ErrorHandler extends App {
 
+	/**
+	 * @param $error_string
+	 */
 	public static function output($error_string) {
 		if (APP_DEBUGER) {
 			try {

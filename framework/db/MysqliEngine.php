@@ -6,12 +6,33 @@ require_once dirname(__FILE__) . "/../../config/conf.php";
  */
 
 class MysqliEngine extends App {
+	/**
+	 * @var mixed
+	 */
 	protected $dbconn;
+	/**
+	 * @var mixed
+	 */
 	private $lastQuery;
+	/**
+	 * @var mixed
+	 */
 	private $sf_errno;
+	/**
+	 * @var mixed
+	 */
 	private $sf_error;
+	/**
+	 * @var mixed
+	 */
 	private $fieldsFetch;
 
+	/**
+	 * @param $host
+	 * @param $user
+	 * @param $pass
+	 * @param $dbname
+	 */
 	public function openConnection($host, $user, $pass, $dbname) {
 		$this->dbconn = new mysqli($host, $user, $pass, $dbname);
 		if ($this->dbconn->connect_errno) {
@@ -19,6 +40,10 @@ class MysqliEngine extends App {
 		}
 	}
 
+	/**
+	 * @param $str_query
+	 * @return mixed
+	 */
 	public function query($str_query) {
 		$this->lastQuery = $str_query;
 		$data = $this->dbconn->query($str_query);
@@ -34,14 +59,23 @@ class MysqliEngine extends App {
 		}
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getFieldsFetch() {
 		return $this->fieldsFetch;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getLastQuery() {
 		return $this->lastQuery;
 	}
 
+	/**
+	 * @param $str_query
+	 */
 	public function cmd($str_query) {
 		$this->lastQuery = $str_query;
 		$res = $this->dbconn->query($str_query);
@@ -54,6 +88,10 @@ class MysqliEngine extends App {
 		}
 	}
 
+	/**
+	 * @param $table
+	 * @param $arrData
+	 */
 	public function insertDb($table, $arrData) {
 		$pre_val = "";
 		$bind_val = "";
@@ -86,6 +124,11 @@ class MysqliEngine extends App {
 		}
 	}
 
+	/**
+	 * @param $table
+	 * @param $arrData
+	 * @param $where
+	 */
 	public function updateDb($table, $arrData, $where) {
 		$pre_val = "";
 		$bind_val = "";
@@ -117,16 +160,25 @@ class MysqliEngine extends App {
 		}
 	}
 
+	/**
+	 * @param $table
+	 * @param $where
+	 * @return mixed
+	 */
 	public function deleteDb($table, $where) {
 		$this->lastQuery = "delete from  $table  where 1=1 $where";
 		return $this->cmd($this->lastQuery);
 	}
 
+	/**
+	 * @param $str_query
+	 * @return mixed
+	 */
 	public function selectAssoc($str_query) {
 		$data = $this->query($str_query);
-                if($data==false){
-                    return [];
-                }
+		if ($data == false) {
+			return [];
+		}
 		$arr = [];
 		while ($row = $data->fetch_assoc()) {
 			$arr[] = $row;
@@ -135,9 +187,14 @@ class MysqliEngine extends App {
 		return $arr;
 	}
 
+	/**
+	 * @param $cols
+	 * @param $tableAndwhere
+	 * @param $limit
+	 */
 	public function selectPaging($cols, $tableAndwhere, $limit = 10) {
 		$aggregate = $this->selectAssoc("select count(*) as jml from $tableAndwhere");
-		$rows = isset($aggregate[0]['jml'])?$aggregate[0]['jml']:0;
+		$rows = isset($aggregate[0]['jml']) ? $aggregate[0]['jml'] : 0;
 		$maxpage = round($rows / $limit, 0, PHP_ROUND_HALF_UP);
 		$page = Req::request('page', 1);
 		$offset = $page <= 0 ? 0 : ($page - 1) * $limit;
@@ -146,6 +203,10 @@ class MysqliEngine extends App {
 		return ['data' => $arr, 'attr' => compact(['maxpage', 'page', 'limit'])];
 	}
 
+	/**
+	 * @param $str_query
+	 * @return mixed
+	 */
 	public function selectArray($str_query) {
 		$data = $this->query($str_query);
 		$arr = [];
@@ -157,10 +218,16 @@ class MysqliEngine extends App {
 		return $arr;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getErrno() {
 		return $this->sf_errno;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getError() {
 		return $this->sf_error;
 	}
