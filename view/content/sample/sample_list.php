@@ -8,10 +8,12 @@ else:
             <thead>
                 <tr>
                     <?php
+$i = 0;
 foreach ($data['data'][0] as $k => $v):
-	if ($k == 0) {
+	if ($i == 0) {
 		$pk = $v;
 	}
+	$i++;
 	echo "<th>$k</th>";
 endforeach
 ?>
@@ -19,7 +21,7 @@ endforeach
             </thead>
             <tbody>
                 <?php foreach ($data['data'] as $k => $v): ?>
-                <tr class="pointer" onclick="oShow('<?=$v['$pk']?>')">
+                <tr class="pointer" onclick="oShow('<?=$pk?>')">
                     <?php foreach ($v as $key => $value): ?>
                     <td>
                         <?=$value?>

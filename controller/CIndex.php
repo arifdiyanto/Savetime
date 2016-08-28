@@ -81,16 +81,16 @@ class CIndex extends Controller {
 		}
 		$str = "";
 		foreach ($karr[0] as $k => $v) {
-			$str .= "<li class='treeview'>
+			$str .= "<li class='treeview menu_item menu_item_" . $v['id'] . "'>
             <a href='#'><i class='" . $v['icon'] . "'></i> <span>" . $v['label'] . "</span>
                 <span class='pull-right-container'>
                   <i class='fa fa-angle-left pull-right'></i>
                 </span>
             </a>";
 			if (isset($karr[$v['id']]) && is_array($karr[$v['id']])) {
-				$str .= "<ul class='treeview-menu' style='display: none;'>";
+				$str .= "<ul class='treeview-menu  menu_item menu_item_" . $v['id'] . "' >";
 				foreach ($karr[$v['id']] as $k1 => $v1) {
-					$str .= "<li data-id=" . $v1['id'] . "><a href='" . ($v1['url'] == '' ? ROOT : ROOT . '/?x=' . $v1['id']) . "'><i class='" . $v1['icon'] . "'></i> " . $v1['label'] . "</a></li>";
+					$str .= "<li class='menu_item  menu_sub_item_" . $v1['id'] . "' data-id=" . $v1['id'] . "><a href='" . ($v1['url'] == '' ? ROOT : ROOT . '/?x=' . $v1['id']) . "'><i class='" . $v1['icon'] . "'></i> " . $v1['label'] . "</a></li>";
 				}
 				$str .= "</ul>";
 			}
@@ -102,6 +102,17 @@ class CIndex extends Controller {
 	public function getArrMenu() {
 		$q = "select * from symenu where isaktif=1";
 		return $this->objSystem->selectAssoc($q);
+	}
+	public function search() {
+		$pg = "system/frm_search";
+		$allsymenu = $this->objSystem->selectAssoc("SELECT * FROM symenu where isaktif=1");
+		$symenu = $this->objSystem->selectAssoc("SELECT * FROM symenu where isaktif=1 and concat(label,note) like '%" . Req::get('q') . "%'");
+		$page_content = View::render("/content/" . $pg, compact(['symenu', 'allsymenu']));
+
+		$theme = Req::get('theme') == '' ? "adminlte" : Req::get('theme');
+		$pgs[0]['label'] = "Search Page";
+		$left_menu = $this->lteMenu();
+		return View::render("/layouts/$theme", compact(['page_content', 'left_menu', 'pgs']));
 	}
 
 }

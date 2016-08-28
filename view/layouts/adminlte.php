@@ -4,13 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?=isset($pgs[0]['label']) ? $pgs[0]['label'] : strtoupper(str_replace("\\", "", APP_BASE))?> | <?=isset($pgs[0]['note']) ? $pgs[0]['note'] : "Home"?></title>
+    <title>
+        <?=isset($pgs[0]['label']) ? $pgs[0]['label'] : strtoupper(str_replace("\\", "", APP_BASE))?> |
+            <?=isset($pgs[0]['note']) ? $pgs[0]['note'] : "Home"?>
+    </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <?php include_once DIR_V . '/layouts/libs.php';?>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("ul.sidebar-menu .menu_item").removeClass('active');
+        $("ul.sidebar-menu li.treeview.menu_item_<?=$pgs[0]['parent']?>").addClass('active');
+        $("ul.sidebar-menu li.treeview ul.treeview-menu.menu_item_<?=$pgs[0]['parent']?>").addClass('active');
+        $("ul.sidebar-menu .menu_sub_item_<?=Req::get('x')?>").addClass('active');
+    });
+    </script>
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue xsidebar-mini sidebar-collapse">
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
@@ -236,8 +247,9 @@
                                 <li class="user-header">
                                     <img src="<?=HTTP_A?>/images/adminlte/user2-160x160.jpg" class="img-circle" alt="User Image">
                                     <p>
-                                        <?=Session::user('username')?> - <?=Session::get('userid')?>
-                                        <small>Login at : <?=date('d M Y H:i', strtotime(Session::get('login_at')))?></small>
+                                        <?=Session::user('username')?> -
+                                            <?=Session::get('userid')?>
+                                                <small>Login at : <?=date('d M Y H:i', strtotime(Session::get('login_at')))?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -284,16 +296,18 @@
                         <img src="<?=HTTP_A?>/images/adminlte/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p title="<?=Session::get('userid')?>"><?=Session::user('username')?></p>
+                        <p title="<?=Session::get('userid')?>">
+                            <?=Session::user('username')?>
+                        </p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
                 <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
+                <form action="<?=ROOT?>/CIndex/search" method="get" class="sidebar-form">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit" name="search-btn" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
                     </div>
@@ -303,7 +317,6 @@
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
                     <?=$left_menu?>
-
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -318,7 +331,9 @@
       </h1>
                 <ol class="breadcrumb">
                     <li><a href="<?=ROOT?>"><i class="fa fa-home"></i> Home</a></li>
-                    <li class="active"><?=isset($pgs[0]['label']) ? $pgs[0]['label'] : ""?></li>
+                    <li class="active">
+                        <?=isset($pgs[0]['label']) ? $pgs[0]['label'] : ""?>
+                    </li>
                 </ol>
             </section>
             <!-- Main content -->
